@@ -73,7 +73,6 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
         <!-- Right: photo -->
         <div data-reveal data-reveal-delay="120" class="hero-photo-wrap">
-          <div class="hero-photo-bg"></div>
           <img
               src="/erik.jpg"
               alt="Erik Weidenauer"

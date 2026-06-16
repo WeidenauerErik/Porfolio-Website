@@ -45,8 +45,8 @@ const experience = [
 
 const skillGroups = [
   { label: 'Backend',           items: ['Symfony', 'Spring Boot', 'Python', 'Doctrine'] },
-  { label: 'Frontend',          items: ['VueJS', 'React', 'Unity'] },
-  { label: 'Netzwerk & Cloud',  items: ['Palo Alto', 'FortiGate', 'Cisco', 'AWS', 'Drupal'] },
+  { label: 'Frontend',          items: ['VueJS', 'React', 'Unity', 'Wordpress', 'Drupal'] },
+  { label: 'Netzwerk & Cloud',  items: ['Palo Alto', 'FortiGate', 'Cisco', 'AWS'] },
   { label: 'Sprachen',          items: ['Deutsch (Muttersprache)', 'Englisch (B2)'] },
 ]
 
@@ -91,7 +91,6 @@ const certificates = [
       </div>
 
       <div class="about-photo-wrap">
-        <div class="about-photo-bg"></div>
         <img src="/erik.jpg" alt="Erik Weidenauer" class="about-photo">
       </div>
     </div>

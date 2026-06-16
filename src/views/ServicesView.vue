@@ -10,28 +10,28 @@ const services = [
     title: 'Web-Entwicklung',
     delay: 0,
     desc: 'Moderne, performante Web-Apps mit Symfony, VueJS und React – von der Idee bis zum Launch.',
-    bullets: ['Symfony & Doctrine Backends', 'VueJS & React Frontends', 'Responsive & performant'],
+    bullets: ['Symfony & Spring Boot Backends', 'VueJS & React Frontends', 'Responsive & Modern Designes'],
   },
   {
     Icon: Gamepad2,
     title: 'App & Game Development',
     delay: 80,
     desc: 'Interaktive Anwendungen und AR-Erlebnisse mit Unity – wie in meiner Diplomarbeit OnlyDance.',
-    bullets: ['Unity & AR', 'Cross-Platform', 'Backend-Anbindung'],
+    bullets: ['Unity & AR', 'Cross-Platform (Capacitor)', 'Backend (Symfony & Spring Boot)'],
   },
   {
     Icon: Server,
     title: 'Backend & APIs',
     delay: 160,
     desc: 'Skalierbare Systeme mit Spring Boot und Python – robuste APIs und saubere Architektur.',
-    bullets: ['Spring Boot & Python', 'REST APIs', 'Datenbank-Design'],
+    bullets: ['Spring Boot & Python & Symfony', 'Datenbank-Design'],
   },
   {
     Icon: Workflow,
     title: 'Automatisierung',
     delay: 240,
     desc: 'Prozesse und Netzwerke automatisieren – Python-Scripting und Tooling aus echter Engineering-Praxis.',
-    bullets: ['Python-Scripting', 'Netzwerk-Automatisierung', 'Tooling & Integration'],
+    bullets: ['Python & Java', 'Netzwerk-Automatisierung', 'Tooling & Integration'],
   },
 ]
 </script>
