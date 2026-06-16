@@ -20,7 +20,7 @@ const featured = [
     Icon: Gamepad2,
     bg: 'linear-gradient(150deg,#2563EB,#1e3a8a)',
     short: 'Unity-basierte Tanz-Lern-App mit AR und Symfony-Backend – meine Diplomarbeit.',
-    to: '/projects',
+    to: '/services',
   },
   {
     title: 'Heatseekers',
@@ -28,7 +28,7 @@ const featured = [
     Icon: Thermometer,
     bg: 'linear-gradient(150deg,#0ea5e9,#2563EB)',
     short: 'Server-Raum-Monitoring auf Basis von Spring Boot und VueJS.',
-    to: '/projects',
+    to: '/services',
   },
 ]
 
@@ -39,12 +39,12 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   <main>
     <!-- Hero -->
     <section class="hero-section">
-      <div class="grain" :style="{ backgroundImage: grainSvg }"></div>
+      <div class="grain" :style="{ backgroundImage: grainSvg }" aria-hidden="true"></div>
       <div class="hero-grid">
         <!-- Left -->
         <div data-reveal>
           <span class="available-badge">
-            <span class="dot"></span>
+            <span class="dot" aria-hidden="true"></span>
             Verfügbar für neue Projekte
           </span>
           <h1 class="hero-h1">
@@ -60,8 +60,8 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
           </div>
           <!--
           <div class="hero-btns">
-            <RouterLink to="/projects" class="btn-primary">
-              <Folder :size="18" /> Projekte ansehen
+            <RouterLink to="/services" class="btn-primary">
+              <Folder :size="18" /> Leistungen ansehen
             </RouterLink>
 
             <RouterLink to="/contact" class="btn-secondary">
@@ -70,13 +70,15 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
           </div>
           -->
         </div>
-
+        
         <!-- Right: photo -->
         <div data-reveal data-reveal-delay="120" class="hero-photo-wrap">
           <img
-              src="/erik.jpg"
-              alt="Erik Weidenauer"
+              src="/erik2.jpeg"
+              alt="Portrait von Erik Weidenauer, Full Stack Developer und Freelancer aus Wien"
               class="hero-photo"
+              width="440"
+              height="517"
           >
         </div>
       </div>
@@ -100,8 +102,8 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     <section class="featured-section">
       <div data-reveal class="featured-header">
         <h2 class="section-title">Aktuelle Projekte</h2>
-        <RouterLink to="/projects" class="see-all-link">
-          Alle ansehen <span>→</span>
+        <RouterLink to="/services" class="see-all-link">
+          Leistungen ansehen <span>→</span>
         </RouterLink>
       </div>
       <div data-reveal class="featured-grid">
@@ -137,9 +139,17 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 }
 
 @media (max-width: 640px) {
-  .hero-section { padding: 36px 20px 24px; }
-  .hero-grid { gap: 28px; }
-  .hero-photo-wrap { max-width: 320px; }
+  .hero-section {
+    padding: 36px 20px 24px;
+  }
+
+  .hero-grid {
+    gap: 28px;
+  }
+
+  .hero-photo-wrap {
+    max-width: 320px;
+  }
 }
 
 .grain {
@@ -402,7 +412,7 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 .featured-card-year {
   font-size: 13.5px;
   font-weight: 600;
-  color: #999;
+  color: #6B7280;
 }
 
 .featured-card-desc {

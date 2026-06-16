@@ -40,7 +40,7 @@ const services = [
   <main class="services-main">
     <div data-reveal class="services-header">
       <span class="section-tag">
-        <Layers :size="15" /> Leistungen
+        <Layers :size="15" aria-hidden="true" /> Leistungen
       </span>
       <h1 class="services-h1">Wie ich dir helfen kann.</h1>
       <p class="services-sub">
@@ -57,14 +57,14 @@ const services = [
         :data-reveal-delay="svc.delay"
         class="service-card"
       >
-        <span class="service-icon">
+        <span class="service-icon" aria-hidden="true">
           <component :is="svc.Icon" :size="27" />
         </span>
         <h3 class="service-title">{{ svc.title }}</h3>
         <p class="service-desc">{{ svc.desc }}</p>
         <div class="service-bullets">
           <div v-for="b in svc.bullets" :key="b" class="bullet-row">
-            <span class="bullet-check"><Check :size="14" /></span>
+            <span class="bullet-check" aria-hidden="true"><Check :size="14" /></span>
             {{ b }}
           </div>
         </div>

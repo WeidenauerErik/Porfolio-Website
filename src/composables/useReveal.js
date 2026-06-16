@@ -4,8 +4,15 @@ export function useReveal() {
   let io = null
 
   onMounted(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
     setTimeout(() => {
       const els = Array.from(document.querySelectorAll('[data-reveal]'))
+
+      if (prefersReduced) {
+        return
+      }
+
       els.forEach(el => {
         el.style.opacity = '0'
         el.style.transform = 'translateY(28px)'
