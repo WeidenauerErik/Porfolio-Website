@@ -91,9 +91,6 @@ function closeMenu() { menuOpen.value = false }
             <Code2 :size="20" />
             Erik Weidenauer
           </RouterLink>
-          <p style="font-size: 14.5px; color: #666; line-height: 1.6; max-width: 280px; margin: 0;">
-            Symfony · Spring Boot · VueJS · Python
-          </p>
         </div>
         <div>
           <div class="footer-section-title">Navigation</div>
@@ -112,9 +109,9 @@ function closeMenu() { menuOpen.value = false }
         <div>
           <div class="footer-section-title">Kontakt</div>
           <div style="display: flex; flex-direction: column; gap: 11px;">
-            <a href="mailto:erik.weidenauer@gmail.com" class="footer-link">
+            <a href="mailto:weidenauer.erik@outlook.com" class="footer-link">
               <Mail :size="15" style="opacity: 0.6;" />
-              erik.weidenauer@gmail.com
+              weidenauer.erik@outlook.com
             </a>
             <a href="https://github.com/WeidenauerErik" target="_blank" rel="noopener" class="footer-link">
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6;display:block;flex-shrink:0;"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
@@ -130,10 +127,7 @@ function closeMenu() { menuOpen.value = false }
       <div class="footer-bottom">
         <div class="footer-bottom-inner">
           <span style="display: inline-flex; align-items: center; gap: 6px;">
-            © WeidenauerErik
-          </span>
-          <span style="display: inline-flex; align-items: center; gap: 5px;">
-            Made with <Heart :size="13" style="color:#2563EB;" fill="#2563EB" /> in Wien
+            © Erik Weidenauer - all rights reserved
           </span>
         </div>
       </div>
