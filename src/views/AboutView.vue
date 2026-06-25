@@ -23,21 +23,21 @@ const experience = [
   {
     role: 'Website Administrator',
     org: 'Naturfreunde Österreich',
-    period: 'Jän 2023 – Feb 2026 · Wien',
+    period: 'Jän 2023 – Feb 2026',
     Icon: Globe,
     desc: 'Betreuung und Wartung der Website der Ortsgruppe Neubau.',
   },
   {
     role: 'Network Engineering Praktikum',
     org: 'CANCOM Austria',
-    period: 'Aug 2024 · Wien',
+    period: 'Aug 2024',
     Icon: Terminal,
     desc: 'NSE-3-Zertifizierung abgeschlossen; Python-Skripte für Netzwerk-Automatisierung entwickelt und implementiert.',
   },
   {
     role: 'Network Engineering Praktikum',
     org: 'Kapsch BusinessCom',
-    period: 'Aug 2023 · Wien',
+    period: 'Aug 2023',
     Icon: Shield,
     desc: 'NSE 1 & NSE 2 erworben; Palo Alto- und FortiGate-Firewalls sowie Cisco-Switches in praktischen Netzwerkumgebungen konfiguriert.',
   },
@@ -91,7 +91,7 @@ const certificates = [
       </div>
 
       <div class="about-photo-wrap">
-        <img src="/erik.jpg" alt="Portrait von Erik Weidenauer, Full Stack Developer aus Wien" class="about-photo" width="400" height="460">
+        <img src="/erik.jpg" alt="Portrait von Erik Weidenauer, Full Stack Developer" class="about-photo" width="400" height="460">
       </div>
     </div>
 

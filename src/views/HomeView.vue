@@ -75,7 +75,7 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
         <div data-reveal data-reveal-delay="120" class="hero-photo-wrap">
           <img
               src="/erik2.jpeg"
-              alt="Portrait von Erik Weidenauer, Full Stack Developer und Freelancer aus Wien"
+              alt="Portrait von Erik Weidenauer, Full Stack Developer und Freelancer"
               class="hero-photo"
               width="440"
               height="517"
