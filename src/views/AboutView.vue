@@ -16,9 +16,9 @@ const experience = [
   {
     role: 'Freelancer – Softwareentwicklung',
     org: 'Selbstständig',
-    period: 'Juni 2026 – heute',
+    period: 'Juni 2026 – Aug 2026',
     Icon: Briefcase,
-    desc: 'Maßgeschneiderte Softwarelösungen für Unternehmen und Privatpersonen – Prozesse automatisieren, technische Herausforderungen lösen und digitale Ideen umsetzen. Sauberer, wartbarer Code über Web-Apps, Desktop-Tools, Backend-Systeme und APIs.',
+    desc: 'Maßgeschneiderte Softwarelösungen für Unternehmen und Privatpersonen – Prozesse automatisieren, technische Herausforderungen lösen und digitale Ideen umgesetzt. Sauberer, wartbarer Code über Web-Apps, Desktop-Tools, Backend-Systeme und APIs.',
   },
   {
     role: 'Website Administrator',

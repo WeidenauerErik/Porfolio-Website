@@ -34,18 +34,19 @@ const services = [
     bullets: ['Python & Java', 'Netzwerk-Automatisierung', 'Tooling & Integration'],
   },
 ]
+
 </script>
 
 <template>
   <main class="services-main">
     <div data-reveal class="services-header">
       <span class="section-tag">
-        <Layers :size="15" aria-hidden="true" /> Leistungen
+        <Layers :size="15" aria-hidden="true" /> Skills & Projekte
       </span>
-      <h1 class="services-h1">Wie ich dir helfen kann.</h1>
+      <h1 class="services-h1">Womit ich mich beschäftige.</h1>
       <p class="services-sub">
-        Maßgeschneiderte Softwarelösungen für Unternehmen und Privatpersonen – sauberer, wartbarer Code
-        über Web-Apps, Backend-Systeme, Tools und APIs, immer auf deine Bedürfnisse zugeschnitten.
+        Sauberer, wartbarer Code über Web-Apps, Backend-Systeme, Tools und APIs – ein Überblick
+        über meine Schwerpunkte und Projekte.
       </p>
     </div>
 

@@ -11,7 +11,7 @@ const menuOpen = ref(false)
 const navLinks = [
   { label: 'Start',      to: '/',         key: 'home',     Icon: Home },
   { label: 'Über mich',  to: '/about',    key: 'about',    Icon: User },
-  { label: 'Leistungen', to: '/services', key: 'services', Icon: Layers },
+  { label: 'Skills',     to: '/services', key: 'services', Icon: Layers },
   //{ label: 'Projekte',   to: '/projects', key: 'projects', Icon: Folder },
   { label: 'Kontakt',    to: '/contact',  key: 'contact',  Icon: Mail },
 ]
@@ -33,11 +33,6 @@ function closeMenu() { menuOpen.value = false }
     <!-- ░░░ NAVIGATION ░░░ -->
     <header class="nav-header">
       <nav class="nav-inner" aria-label="Hauptnavigation">
-        <RouterLink to="/" class="nav-logo" @click="closeMenu" aria-label="Erik Weidenauer – Startseite">
-          <Code2 :size="22" aria-hidden="true" />
-          Erik Weidenauer
-        </RouterLink>
-
         <div class="nav-links desktop-only">
           <RouterLink
             v-for="link in navLinks"

@@ -43,17 +43,13 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
       <div class="hero-grid">
         <!-- Left -->
         <div data-reveal>
-          <span class="available-badge">
-            <span class="dot" aria-hidden="true"></span>
-            Verfügbar für neue Projekte
-          </span>
           <h1 class="hero-h1">
             Full Stack<br>
             <span style="color: #2563EB;">Developer</span>
           </h1>
           <p class="hero-sub">
-            Hi, ich bin <strong style="color:#0F0F0F;">Erik Weidenauer</strong> – Absolvent der HTL Rennweg
-            und fokussierter Freelancer. Ich entwickle moderne, hochwertige Software.
+            Hi, ich bin <strong style="color:#0F0F0F;">Erik Weidenauer</strong> – Absolvent der HTL Rennweg.
+            Ich entwickle moderne, hochwertige Software.
           </p>
           <div class="tech-chips">
             <span v-for="t in heroTech" :key="t" class="tech-chip">{{ t }}</span>
@@ -75,7 +71,7 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
         <div data-reveal data-reveal-delay="120" class="hero-photo-wrap">
           <img
               src="/erik2.jpeg"
-              alt="Portrait von Erik Weidenauer, Full Stack Developer und Freelancer"
+              alt="Portrait von Erik Weidenauer, Full Stack Developer"
               class="hero-photo"
               width="440"
               height="517"
@@ -166,29 +162,6 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   gap: 50px;
   align-items: center;
   position: relative;
-}
-
-.available-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 14px;
-  border-radius: 999px;
-  background: #F8F8F8;
-  border: 1px solid rgba(15, 15, 15, 0.06);
-  font-size: 13px;
-  font-weight: 600;
-  color: #555;
-  margin-bottom: 26px;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgb(34, 197, 94);
-  box-shadow: rgba(34, 197, 94, 0.18) 0px 0px 0px 4px;
-  flex-shrink: 0;
 }
 
 .hero-h1 {

@@ -1,5 +1,5 @@
 <script setup>
-import { MessageCircle, Send, Mail, Phone, MapPin, Clock } from 'lucide-vue-next'
+import { MessageCircle, Send, Mail, Phone, MapPin } from 'lucide-vue-next'
 import { useReveal } from '@/composables/useReveal'
 
 useReveal()
@@ -7,10 +7,9 @@ useReveal()
 const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`
 
 const contacts = [
-  { Icon: Mail,   label: 'E-Mail',        value: 'weidenauer.erik@outlook.com', href: 'mailto:weidenauer.erik@outlook.com' },
-  { Icon: Phone,  label: 'Telefon',       value: '+43 664 75596725',          href: 'tel:+4366475596725' },
-  { Icon: MapPin, label: 'Standort',      value: 'Österreich',          href: null },
-  { Icon: Clock,  label: 'Verfügbarkeit', value: 'Verfügbar für neue Projekte', href: null },
+  { Icon: Mail,   label: 'E-Mail',   value: 'weidenauer.erik@outlook.com', href: 'mailto:weidenauer.erik@outlook.com' },
+  { Icon: Phone,  label: 'Telefon',  value: '+43 664 75596725',            href: 'tel:+4366475596725' },
+  { Icon: MapPin, label: 'Standort', value: 'Österreich',                  href: null },
 ]
 </script>
 
@@ -28,9 +27,9 @@ const contacts = [
           <span class="section-tag">
             <MessageCircle :size="15" aria-hidden="true" /> Kontakt
           </span>
-          <h1 class="contact-h1">Lass uns etwas<br>bauen.</h1>
+          <h1 class="contact-h1">Sag hallo.</h1>
           <p class="contact-sub">
-            Egal ob konkretes Projekt oder erste Idee – schreib mir und wir finden gemeinsam die beste Lösung.
+            Fragen, Feedback oder einfach vernetzen – schreib mir gerne.
           </p>
           <div class="contact-actions">
             <a href="mailto:weidenauer.erik@outlook.com" class="btn-email">

@@ -10,7 +10,7 @@ const breadcrumbs = {
   ],
   '/services': [
     { '@type': 'ListItem', position: 1, name: 'Start', item: `${BASE_URL}/` },
-    { '@type': 'ListItem', position: 2, name: 'Leistungen', item: `${BASE_URL}/services` },
+    { '@type': 'ListItem', position: 2, name: 'Skills & Projekte', item: `${BASE_URL}/services` },
   ],
   '/contact': [
     { '@type': 'ListItem', position: 1, name: 'Start', item: `${BASE_URL}/` },
@@ -23,8 +23,8 @@ const routes = [
     path: '/',
     component: HomeView,
     meta: {
-      title: 'Erik Weidenauer – Full Stack Developer & Freelancer',
-      description: 'Full Stack Developer und Freelancer. Spezialisiert auf Symfony, VueJS, Spring Boot und Python. Moderne, maßgeschneiderte Software für Web, Backend und APIs.',
+      title: 'Erik Weidenauer – Full Stack Developer',
+      description: 'Full Stack Developer. Spezialisiert auf Symfony, VueJS, Spring Boot und Python. Portfolio mit Projekten aus Web, Backend und APIs.',
       canonical: `${BASE_URL}/`,
     },
   },
@@ -33,7 +33,7 @@ const routes = [
     component: () => import('../views/AboutView.vue'),
     meta: {
       title: 'Über mich | Erik Weidenauer – Full Stack Developer',
-      description: 'HTL-Rennweg-Absolvent, Freelancer und Softwareentwickler. Fortinet NSE 1–3 zertifiziert. Erfahrung mit Symfony, VueJS, Spring Boot, Python und Netzwerk-Engineering.',
+      description: 'HTL-Rennweg-Absolvent und Softwareentwickler. Fortinet NSE 1–3 zertifiziert. Erfahrung mit Symfony, VueJS, Spring Boot, Python und Netzwerk-Engineering.',
       canonical: `${BASE_URL}/about`,
     },
   },
@@ -41,8 +41,8 @@ const routes = [
     path: '/services',
     component: () => import('../views/ServicesView.vue'),
     meta: {
-      title: 'Leistungen | Web-Entwicklung & Software – Erik Weidenauer',
-      description: 'Web-Entwicklung, App-Entwicklung, Backend-Systeme und Automatisierung. Maßgeschneiderte Softwarelösungen mit Symfony, VueJS, Spring Boot und Python – Freelancer.',
+      title: 'Skills & Projekte | Erik Weidenauer – Full Stack Developer',
+      description: 'Web-Entwicklung, App-Entwicklung, Backend-Systeme und Automatisierung mit Symfony, VueJS, Spring Boot und Python.',
       canonical: `${BASE_URL}/services`,
     },
   },
@@ -50,8 +50,8 @@ const routes = [
     path: '/contact',
     component: () => import('../views/ContactView.vue'),
     meta: {
-      title: 'Kontakt | Erik Weidenauer – Freelancer',
-      description: 'Nimm Kontakt mit Erik Weidenauer auf – Full Stack Developer und Freelancer aus. Verfügbar für neue Projekte. Jetzt anfragen und gemeinsam dein Projekt umsetzen.',
+      title: 'Kontakt | Erik Weidenauer – Full Stack Developer',
+      description: 'Nimm Kontakt mit Erik Weidenauer auf – Full Stack Developer. Schreib mir gerne bei Fragen oder Anliegen.',
       canonical: `${BASE_URL}/contact`,
     },
   },
