@@ -1,31 +1,31 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref } from 'vue'
 import {
-  Code2, Home, User, Layers, Folder, Mail, ArrowUpRight, Menu, X, Heart
+  Code2, Home, Briefcase, GraduationCap, Layers, Award, Mail, ArrowUpRight, Menu, X
 } from 'lucide-vue-next'
+import { useScrollSpy } from '@/composables/useScrollSpy'
 
-const route = useRoute()
 const menuOpen = ref(false)
 
 const navLinks = [
-  { label: 'Start',      to: '/',         key: 'home',     Icon: Home },
-  { label: 'Über mich',  to: '/about',    key: 'about',    Icon: User },
-  { label: 'Skills',     to: '/services', key: 'services', Icon: Layers },
-  //{ label: 'Projekte',   to: '/projects', key: 'projects', Icon: Folder },
-  { label: 'Kontakt',    to: '/contact',  key: 'contact',  Icon: Mail },
+  { label: 'Start',           id: 'home',            Icon: Home },
+  { label: 'Berufserfahrung', id: 'berufserfahrung',  Icon: Briefcase },
+  { label: 'Ausbildung',      id: 'ausbildung',       Icon: GraduationCap },
+  { label: 'Skills',          id: 'skills',           Icon: Layers },
+  { label: 'Zertifikate',     id: 'zertifikate',      Icon: Award },
 ]
 
+const { activeId } = useScrollSpy(navLinks.map(l => l.id))
+
 function isActive(link) {
-  if (link.key === 'home') return route.path === '/'
-  return route.path.startsWith('/' + link.key)
+  return activeId.value === link.id
 }
 
 function closeMenu() { menuOpen.value = false }
 </script>
 
 <template>
-  <div style="position: relative; overflow-x: clip; background: #fff; min-height: 100vh; display: flex; flex-direction: column;">
+  <div style="position: relative; overflow-x: clip; background: var(--paper); min-height: 100vh; display: flex; flex-direction: column;">
 
     <!-- Accessibility: Skip to main content -->
     <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
@@ -34,10 +34,10 @@ function closeMenu() { menuOpen.value = false }
     <header class="nav-header">
       <nav class="nav-inner" aria-label="Hauptnavigation">
         <div class="nav-links desktop-only">
-          <RouterLink
+          <a
             v-for="link in navLinks"
-            :key="link.key"
-            :to="link.to"
+            :key="link.id"
+            :href="'#' + link.id"
             class="nav-link"
             :class="{ active: isActive(link) }"
             :aria-current="isActive(link) ? 'page' : undefined"
@@ -45,13 +45,13 @@ function closeMenu() { menuOpen.value = false }
             <component :is="link.Icon" :size="15" style="opacity:0.55;" aria-hidden="true" />
             {{ link.label }}
             <span v-if="isActive(link)" class="active-bar"></span>
-          </RouterLink>
+          </a>
         </div>
 
         <div style="display: flex; align-items: center; gap: 12px;">
-          <RouterLink to="/contact" class="btn-talk" @click="closeMenu">
+          <a href="#contact" class="btn-talk" @click="closeMenu">
             Let's Talk <ArrowUpRight :size="16" aria-hidden="true" />
-          </RouterLink>
+          </a>
           <button
             class="hamburger mobile-only"
             @click="menuOpen = !menuOpen"
@@ -65,18 +65,18 @@ function closeMenu() { menuOpen.value = false }
       </nav>
 
       <nav v-if="menuOpen" id="mobile-navigation" class="mobile-menu" aria-label="Mobile Navigation">
-        <RouterLink
+        <a
           v-for="link in navLinks"
-          :key="link.key"
-          :to="link.to"
+          :key="link.id"
+          :href="'#' + link.id"
           class="mobile-link"
           :class="{ active: isActive(link) }"
           :aria-current="isActive(link) ? 'page' : undefined"
           @click="closeMenu"
         >
-          <component :is="link.Icon" :size="19" style="color: #2563EB;" aria-hidden="true" />
+          <component :is="link.Icon" :size="19" style="color: var(--accent);" aria-hidden="true" />
           {{ link.label }}
-        </RouterLink>
+        </a>
       </nav>
     </header>
 
@@ -89,23 +89,23 @@ function closeMenu() { menuOpen.value = false }
     <footer class="site-footer">
       <div class="footer-inner">
         <div>
-          <RouterLink to="/" class="nav-logo" style="margin-bottom: 14px; display: inline-flex;" aria-label="Erik Weidenauer – Startseite">
+          <a href="#home" class="nav-logo" style="margin-bottom: 14px; display: inline-flex;" aria-label="Erik Weidenauer – Startseite">
             <Code2 :size="20" aria-hidden="true" />
             Erik Weidenauer
-          </RouterLink>
+          </a>
         </div>
         <nav aria-label="Footer-Navigation">
           <div class="footer-section-title">Navigation</div>
           <div style="display: flex; flex-direction: column; gap: 11px;">
-            <RouterLink
+            <a
               v-for="link in navLinks"
-              :key="link.key"
-              :to="link.to"
+              :key="link.id"
+              :href="'#' + link.id"
               class="footer-link"
             >
               <component :is="link.Icon" :size="15" style="opacity: 0.6;" aria-hidden="true" />
               {{ link.label }}
-            </RouterLink>
+            </a>
           </div>
         </nav>
         <div>
@@ -143,8 +143,8 @@ function closeMenu() { menuOpen.value = false }
   top: 0;
   z-index: 50;
   backdrop-filter: saturate(160%) blur(14px);
-  background: rgba(255, 255, 255, 0.82);
-  border-bottom: 1px solid rgba(15, 15, 15, 0.06);
+  background: rgba(250, 250, 248, 0.82);
+  border-bottom: 1px solid rgba(19, 18, 23, 0.06);
 }
 .nav-inner {
   max-width: 1200px;
@@ -159,10 +159,11 @@ function closeMenu() { menuOpen.value = false }
   display: flex;
   align-items: center;
   gap: 11px;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 18px;
   letter-spacing: -0.02em;
-  color: #0F0F0F;
+  color: var(--ink);
 }
 .nav-links {
   display: flex;
@@ -176,10 +177,10 @@ function closeMenu() { menuOpen.value = false }
   gap: 7px;
   font-size: 14.5px;
   font-weight: 500;
-  color: #3a3a3a;
-  transition: color 0.2s ease;
+  color: var(--ink-soft);
+  transition: color 0.15s var(--ease-out);
 }
-.nav-link.active { color: #0F0F0F; font-weight: 600; }
+.nav-link.active { color: var(--ink); font-weight: 600; }
 .active-bar {
   position: absolute;
   left: 22px;
@@ -187,35 +188,38 @@ function closeMenu() { menuOpen.value = false }
   bottom: -7px;
   height: 2px;
   border-radius: 2px;
-  background: #2563EB;
+  background: var(--accent);
 }
 .btn-talk {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 11px 20px;
-  border-radius: 12px;
-  background: #0F0F0F;
+  border-radius: 11px;
+  background: var(--ink);
   color: #fff;
   font-size: 14.5px;
   font-weight: 600;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s var(--ease-out), background 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
 }
-.btn-talk:hover { transform: translateY(-2px); background: #2563EB; }
+.btn-talk:hover { transform: translateY(-2px); background: var(--accent); box-shadow: var(--shadow-md); }
+.btn-talk:active { transform: translateY(0) scale(0.97); }
 .hamburger {
   display: grid;
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: 12px;
-  border: 1px solid rgba(15, 15, 15, 0.12);
-  background: #fff;
+  border-radius: 11px;
+  border: 1px solid rgba(19, 18, 23, 0.14);
+  background: var(--paper);
   cursor: pointer;
-  color: #0F0F0F;
+  color: var(--ink);
+  transition: transform 0.15s var(--ease-out);
 }
+.hamburger:active { transform: scale(0.94); }
 .mobile-menu {
-  border-top: 1px solid rgba(15, 15, 15, 0.06);
-  background: rgba(255, 255, 255, 0.97);
+  border-top: 1px solid rgba(19, 18, 23, 0.06);
+  background: rgba(250, 250, 248, 0.98);
   padding: 8px 18px 18px;
 }
 .mobile-link {
@@ -225,17 +229,17 @@ function closeMenu() { menuOpen.value = false }
   padding: 15px 10px;
   font-size: 17px;
   font-weight: 600;
-  color: #3a3a3a;
-  border-bottom: 1px solid rgba(15, 15, 15, 0.05);
+  color: var(--ink-soft);
+  border-bottom: 1px solid rgba(19, 18, 23, 0.05);
 }
-.mobile-link.active { color: #0F0F0F; }
+.mobile-link.active { color: var(--ink); }
 .desktop-only { display: flex; }
 .mobile-only { display: none; }
 
 /* Footer */
 .site-footer {
-  border-top: 1px solid rgba(15, 15, 15, 0.07);
-  background: #fff;
+  border-top: 1px solid rgba(19, 18, 23, 0.07);
+  background: var(--paper);
   margin-top: 60px;
 }
 .footer-inner {
@@ -247,11 +251,10 @@ function closeMenu() { menuOpen.value = false }
   gap: 32px;
 }
 .footer-section-title {
+  font-family: var(--font-display);
   font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #6B7280;
+  font-weight: 600;
+  color: var(--ink-soft);
   margin-bottom: 16px;
 }
 .footer-link {
@@ -259,12 +262,12 @@ function closeMenu() { menuOpen.value = false }
   align-items: center;
   gap: 9px;
   font-size: 14.5px;
-  color: #444;
-  transition: color 0.2s ease;
+  color: var(--ink-soft);
+  transition: color 0.15s var(--ease-out);
 }
-.footer-link:hover { color: #2563EB; }
+.footer-link:hover { color: var(--accent); }
 .footer-bottom {
-  border-top: 1px solid rgba(15, 15, 15, 0.07);
+  border-top: 1px solid rgba(19, 18, 23, 0.07);
 }
 .footer-bottom-inner {
   max-width: 1200px;
@@ -276,7 +279,7 @@ function closeMenu() { menuOpen.value = false }
   align-items: center;
   justify-content: space-between;
   font-size: 13.5px;
-  color: #6B7280;
+  color: var(--ink-soft);
 }
 
 @media (max-width: 880px) {

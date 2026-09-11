@@ -1,20 +1,45 @@
+:root {
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --ink: #131217;
+  --ink-soft: #4a4852;
+  --paper: #FAFAF8;
+  --paper-raised: #F3F1ED;
+
+  --accent: #3452D6;
+  --accent-ink: #26399e;
+  --accent-tint: rgba(52, 82, 214, 0.09);
+
+  --shadow-sm: 0 10px 24px rgba(19, 18, 23, 0.06);
+  --shadow-md: 0 20px 44px -12px rgba(38, 57, 158, 0.22);
+  --shadow-dark: 0 24px 60px -14px rgba(0, 0, 0, 0.45);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
 html { scroll-behavior: smooth; }
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
-  color: #0F0F0F;
-  background: #ffffff;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-::selection { background: #2563EB; color: #fff; }
+h1, h2, h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+::selection { background: var(--accent); color: #fff; }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; }
 
 /* Accessibility: Keyboard focus */
 :focus-visible {
-  outline: 3px solid #2563EB;
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -26,7 +51,7 @@ button { font-family: inherit; }
   left: 16px;
   z-index: 9999;
   padding: 12px 22px;
-  background: #2563EB;
+  background: var(--accent);
   color: #fff;
   font-weight: 700;
   font-size: 15px;
@@ -35,8 +60,28 @@ button { font-family: inherit; }
 }
 .skip-link:focus {
   top: 0;
-  outline: 3px solid #1d4ed8;
+  outline: 3px solid var(--accent-ink);
   outline-offset: 2px;
+}
+
+/* Shared section label — used instead of an all-caps pill badge */
+.eyebrow {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 2px;
+  background: var(--accent);
+  transform: translateY(-4px);
 }
 
 /* Accessibility: Respect reduced motion */
