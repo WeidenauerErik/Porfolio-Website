@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import {
-  Code2, Home, Briefcase, GraduationCap, Layers, Award, Mail, ArrowUpRight, Menu, X
+  Code2, Home, Briefcase, GraduationCap, Award, Mail, ArrowUpRight, Menu, X
 } from 'lucide-vue-next'
 import { useScrollSpy } from '@/composables/useScrollSpy'
 
@@ -11,7 +11,6 @@ const navLinks = [
   { label: 'Start',           id: 'home',            Icon: Home },
   { label: 'Berufserfahrung', id: 'berufserfahrung',  Icon: Briefcase },
   { label: 'Ausbildung',      id: 'ausbildung',       Icon: GraduationCap },
-  { label: 'Skills',          id: 'skills',           Icon: Layers },
   { label: 'Zertifikate',     id: 'zertifikate',      Icon: Award },
 ]
 

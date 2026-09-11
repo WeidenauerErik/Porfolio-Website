@@ -54,13 +54,6 @@ const education = [
   },
 ]
 
-const skillGroups = [
-  {label: 'Backend', items: ['Symfony', 'Spring Boot', 'Python', 'Doctrine']},
-  {label: 'Frontend', items: ['VueJS', 'React', 'Unity', 'Wordpress', 'Drupal']},
-  {label: 'Netzwerk & Cloud', items: ['Palo Alto', 'FortiGate', 'Cisco', 'AWS']},
-  {label: 'Sprachen', items: ['Deutsch (Muttersprache)', 'Englisch (B2)']},
-]
-
 const certificates = [
   {title: 'AWS – Amazon Location Service', meta: 'AWS Training & Certification · Feb 2026', Icon: Cloud},
   {title: 'AWS – Amazon Translate', meta: 'AWS Training & Certification · Feb 2026', Icon: Cloud},
@@ -184,30 +177,17 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
         </div>
       </div>
 
-      <!-- Skills -->
-      <div id="skills" data-reveal class="skills-card">
-        <h3 class="skills-title">Skills</h3>
-        <div class="skills-groups">
-          <div v-for="g in skillGroups" :key="g.label" class="skill-group">
-            <div class="skill-group-label">{{ g.label }}</div>
-            <div class="skill-chips">
-              <span v-for="it in g.items" :key="it" class="skill-chip">{{ it }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Certificates -->
       <div id="zertifikate" data-reveal class="certs-section">
         <span class="eyebrow">Zertifikate &amp; Workshops</span>
-        <div class="certs-grid">
-          <div v-for="c in certificates" :key="c.title" class="cert-card">
-            <span class="cert-icon" aria-hidden="true">
+        <div class="cert-timeline">
+          <div v-for="c in certificates" :key="c.title" class="cert-timeline-item">
+            <span class="cert-timeline-icon" aria-hidden="true">
               <component :is="c.Icon" :size="20"/>
             </span>
             <div>
-              <div class="cert-title">{{ c.title }}</div>
-              <div class="cert-meta">{{ c.meta }}</div>
+              <div class="cert-timeline-title">{{ c.title }}</div>
+              <div class="cert-timeline-meta">{{ c.meta }}</div>
             </div>
           </div>
         </div>
@@ -216,8 +196,8 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
     <!-- Contact -->
     <section id="contact" class="contact-main">
+      <span data-reveal class="eyebrow contact-eyebrow">Kontakt</span>
       <div data-reveal class="contact-card">
-        <span class="eyebrow contact-eyebrow">Kontakt</span>
         <div class="contact-grain" :style="{ backgroundImage: grainSvg }" aria-hidden="true"></div>
         <div class="contact-glow" aria-hidden="true"></div>
         <div class="contact-grid">
@@ -479,79 +459,31 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   max-width: 60ch;
 }
 
-/* Skills */
-.skills-card {
-  background: var(--paper-raised);
-  border-radius: 22px;
-  padding: 32px;
-  margin-bottom: 60px;
-}
-
-.skills-title {
-  font-family: var(--font-display);
-  font-size: 21px;
-  font-weight: 700;
-  margin: 0 0 20px;
-}
-
-.skills-groups {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-}
-
-.skill-group-label {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--ink-soft);
-  margin-bottom: 9px;
-}
-
-.skill-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-}
-
-.skill-chip {
-  padding: 6px 11px;
-  border-radius: 7px;
-  background: #fff;
-  font-size: 13.5px;
-  font-weight: 500;
-  color: var(--ink);
-}
-
 /* Certificates */
 .certs-section {
   margin-bottom: 0;
 }
 
-.certs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  gap: 1px;
+.cert-timeline {
+  display: flex;
+  flex-direction: column;
   margin-top: 16px;
-  background: rgba(19, 18, 23, 0.08);
-  border: 1px solid rgba(19, 18, 23, 0.08);
-  border-radius: 18px;
-  overflow: hidden;
 }
 
-.cert-card {
+.cert-timeline-item {
   display: flex;
-  gap: 14px;
+  gap: 16px;
   align-items: flex-start;
-  background: #fff;
-  padding: 20px 22px;
+  padding: 18px 4px;
+  border-bottom: 1px solid rgba(19, 18, 23, 0.08);
   transition: background 0.2s var(--ease-out);
 }
 
-.cert-card:hover {
-  background: var(--paper-raised);
+.cert-timeline-item:first-child {
+  padding-top: 4px;
 }
 
-.cert-icon {
+.cert-timeline-icon {
   display: grid;
   place-items: center;
   width: 40px;
@@ -562,16 +494,18 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   flex-shrink: 0;
 }
 
-.cert-title {
-  font-size: 15.5px;
+.cert-timeline-title {
+  font-family: var(--font-display);
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.3;
+  margin: 0;
 }
 
-.cert-meta {
+.cert-timeline-meta {
   font-size: 13px;
   color: var(--ink-soft);
-  margin-top: 3px;
+  margin-top: 4px;
   font-variant-numeric: tabular-nums;
 }
 
@@ -592,11 +526,7 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 }
 
 .contact-eyebrow {
-  color: rgba(255, 255, 255, 0.65);
-}
-
-.contact-eyebrow::before {
-  background: #7aa2ff;
+  margin-bottom: 22px;
 }
 
 .contact-grain {
@@ -782,9 +712,15 @@ a.contact-row:hover {
     font-size: 16px;
   }
 
-  .skills-card {
-    padding: 24px;
-    margin-bottom: 40px;
+  .cert-timeline-item {
+    padding: 14px 4px;
+    gap: 12px;
+  }
+
+  .cert-timeline-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
   }
 
   .contact-main {
