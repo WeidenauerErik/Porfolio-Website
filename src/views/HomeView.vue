@@ -178,8 +178,8 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
       </div>
 
       <!-- Certificates -->
-      <div id="zertifikate" data-reveal class="certs-section">
-        <span class="eyebrow">Zertifikate &amp; Workshops</span>
+      <div id="zertifikate" data-reveal class="timeline-section">
+        <span class="sub-heading">Zertifikate &amp; Workshops</span>
         <div class="cert-timeline">
           <div v-for="c in certificates" :key="c.title" class="cert-timeline-item">
             <span class="cert-timeline-icon" aria-hidden="true">
@@ -192,46 +192,44 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
           </div>
         </div>
       </div>
-    </section>
+      <!-- Contact -->
+      <div id="contact">
+        <div data-reveal class="contact-card">
+          <div class="contact-grain" :style="{ backgroundImage: grainSvg }" aria-hidden="true"></div>
+          <div class="contact-glow" aria-hidden="true"></div>
+          <div class="contact-grid">
+            <div style="position: relative;">
 
-    <!-- Contact -->
-    <section id="contact" class="contact-main">
-      <span data-reveal class="eyebrow contact-eyebrow">Kontakt</span>
-      <div data-reveal class="contact-card">
-        <div class="contact-grain" :style="{ backgroundImage: grainSvg }" aria-hidden="true"></div>
-        <div class="contact-glow" aria-hidden="true"></div>
-        <div class="contact-grid">
-          <div style="position: relative;">
-
-            <h2 class="contact-h1">Sag hallo.</h2>
-            <p class="contact-sub">
-              Fragen, Feedback oder einfach vernetzen – schreib mir gerne.
-            </p>
-            <div class="contact-actions">
-              <a href="mailto:weidenauer.erik@outlook.com" class="btn-email">
-                <Send :size="18" aria-hidden="true"/>
-                E-Mail senden
-              </a>
+              <h2 class="contact-h1">Sag hallo.</h2>
+              <p class="contact-sub">
+                Fragen, Feedback oder einfach vernetzen – schreib mir gerne.
+              </p>
+              <div class="contact-actions">
+                <a href="mailto:weidenauer.erik@outlook.com" class="btn-email">
+                  <Send :size="18" aria-hidden="true"/>
+                  E-Mail senden
+                </a>
+              </div>
             </div>
-          </div>
 
-          <div class="contact-details">
-            <component
-                v-for="c in contacts"
-                :key="c.label"
-                :is="c.href ? 'a' : 'div'"
-                :href="c.href || undefined"
-                class="contact-row"
-                :style="c.href ? {} : { cursor: 'default' }"
-            >
+            <div class="contact-details">
+              <component
+                  v-for="c in contacts"
+                  :key="c.label"
+                  :is="c.href ? 'a' : 'div'"
+                  :href="c.href || undefined"
+                  class="contact-row"
+                  :style="c.href ? {} : { cursor: 'default' }"
+              >
               <span class="contact-icon" aria-hidden="true">
                 <component :is="c.Icon" :size="21"/>
               </span>
-              <div>
-                <div class="contact-label">{{ c.label }}</div>
-                <div class="contact-value">{{ c.value }}</div>
-              </div>
-            </component>
+                <div>
+                  <div class="contact-label">{{ c.label }}</div>
+                  <div class="contact-value">{{ c.value }}</div>
+                </div>
+              </component>
+            </div>
           </div>
         </div>
       </div>
