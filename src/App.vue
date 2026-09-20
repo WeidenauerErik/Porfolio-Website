@@ -87,12 +87,6 @@ function closeMenu() { menuOpen.value = false }
     <!-- ░░░ FOOTER ░░░ -->
     <footer class="site-footer">
       <div class="footer-inner">
-        <div>
-          <a href="#home" class="nav-logo" style="margin-bottom: 14px; display: inline-flex;" aria-label="Erik Weidenauer – Startseite">
-            <Code2 :size="20" aria-hidden="true" />
-            Erik Weidenauer
-          </a>
-        </div>
         <nav aria-label="Footer-Navigation">
           <div class="footer-section-title">Navigation</div>
           <div style="display: flex; flex-direction: column; gap: 11px;">
