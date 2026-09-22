@@ -411,6 +411,10 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   padding-top: 4px;
 }
 
+.timeline-item:last-child {
+  border-bottom: none;
+}
+
 .timeline-icon {
   display: grid;
   place-items: center;
@@ -479,6 +483,10 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 .cert-timeline-item:first-child {
   padding-top: 4px;
+}
+
+.cert-timeline-item:last-child {
+  border-bottom: none;
 }
 
 .cert-timeline-icon {
