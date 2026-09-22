@@ -4,6 +4,7 @@ import {
   Code2, Home, Briefcase, GraduationCap, Award, Mail, ArrowUpRight, Menu, X
 } from 'lucide-vue-next'
 import { useScrollSpy } from '@/composables/useScrollSpy'
+import HomeView from '@/views/HomeView.vue'
 
 const menuOpen = ref(false)
 
@@ -81,7 +82,7 @@ function closeMenu() { menuOpen.value = false }
 
     <!-- ░░░ PAGE CONTENT ░░░ -->
     <div id="main-content" tabindex="-1" style="flex: 1;">
-      <RouterView />
+      <HomeView />
     </div>
 
     <!-- ░░░ FOOTER ░░░ -->
