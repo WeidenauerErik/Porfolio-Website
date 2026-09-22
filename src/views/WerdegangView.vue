@@ -43,8 +43,8 @@ const education = [
 <template>
   <main class="page-main">
     <header data-reveal class="page-hero">
-      <h1 class="page-h1">Werdegang</h1>
-      <p class="page-sub">Berufserfahrung und Ausbildung.</p>
+      <h1 class="page-h1">Berufserfahrung und Ausbildung</h1>
+      <p class="page-sub">Jobs, Praktika und Ausbildung.</p>
     </header>
 
     <!-- Experience -->

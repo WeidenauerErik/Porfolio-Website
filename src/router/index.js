@@ -17,7 +17,7 @@ const routes = [
     path: '/werdegang',
     component: () => import('../views/WerdegangView.vue'),
     meta: {
-      title: 'Werdegang – Erik Weidenauer',
+      title: 'Berufserfahrung und Ausbildung – Erik Weidenauer',
       description: 'Berufserfahrung und Ausbildung von Erik Weidenauer, Full Stack Developer aus Österreich.',
       canonical: `${BASE_URL}/werdegang`,
     },
