@@ -1,27 +1,38 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router'
 import {
-  Code2, Home, Briefcase, GraduationCap, Award, Mail, ArrowUpRight, Menu, X
+  Home, Briefcase, Award, Mail, ArrowUpRight
 } from 'lucide-vue-next'
-import { useScrollSpy } from '@/composables/useScrollSpy'
-import HomeView from '@/views/HomeView.vue'
 
 const menuOpen = ref(false)
+const route = useRoute()
 
 const navLinks = [
-  { label: 'Start',           id: 'home',            Icon: Home },
-  { label: 'Berufserfahrung', id: 'berufserfahrung',  Icon: Briefcase },
-  { label: 'Ausbildung',      id: 'ausbildung',       Icon: GraduationCap },
-  { label: 'Zertifikate',     id: 'zertifikate',      Icon: Award },
+  { label: 'Start',                        to: '/',            Icon: Home },
+  { label: 'Berufserfahrung & Ausbildung', to: '/werdegang',   Icon: Briefcase },
+  { label: 'Zertifikate & Auszeichnungen', to: '/zertifikate', Icon: Award },
+  { label: 'Kontakt',                      to: '/kontakt',     Icon: Mail },
 ]
 
-const { activeId } = useScrollSpy(navLinks.map(l => l.id))
-
 function isActive(link) {
-  return activeId.value === link.id
+  return route.path === link.to
 }
 
 function closeMenu() { menuOpen.value = false }
+
+watch(menuOpen, (open) => {
+  document.documentElement.style.overflow = open ? 'hidden' : ''
+})
+
+function onKeydown(e) {
+  if (e.key === 'Escape' && menuOpen.value) closeMenu()
+}
+window.addEventListener('keydown', onKeydown)
+onUnmounted(() => {
+  window.removeEventListener('keydown', onKeydown)
+  document.documentElement.style.overflow = ''
+})
 </script>
 
 <template>
@@ -31,13 +42,13 @@ function closeMenu() { menuOpen.value = false }
     <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
 
     <!-- ░░░ NAVIGATION ░░░ -->
-    <header class="nav-header">
+    <header class="nav-header" :class="{ 'nav-header--transparent': menuOpen }">
       <nav class="nav-inner" aria-label="Hauptnavigation">
         <div class="nav-links desktop-only">
-          <a
+          <RouterLink
             v-for="link in navLinks"
-            :key="link.id"
-            :href="'#' + link.id"
+            :key="link.to"
+            :to="link.to"
             class="nav-link"
             :class="{ active: isActive(link) }"
             :aria-current="isActive(link) ? 'page' : undefined"
@@ -45,44 +56,71 @@ function closeMenu() { menuOpen.value = false }
             <component :is="link.Icon" :size="15" style="opacity:0.55;" aria-hidden="true" />
             {{ link.label }}
             <span v-if="isActive(link)" class="active-bar"></span>
-          </a>
+          </RouterLink>
         </div>
 
         <div style="display: flex; align-items: center; gap: 12px;">
-          <a href="#contact" class="btn-talk" @click="closeMenu">
+          <RouterLink to="/kontakt" class="btn-talk" @click="closeMenu">
             Let's Talk <ArrowUpRight :size="16" aria-hidden="true" />
-          </a>
+          </RouterLink>
           <button
             class="hamburger mobile-only"
+            :class="{ 'is-open': menuOpen }"
             @click="menuOpen = !menuOpen"
             :aria-expanded="menuOpen"
             aria-controls="mobile-navigation"
             aria-label="Menü"
           >
-            <component :is="menuOpen ? X : Menu" :size="22" aria-hidden="true" />
+            <span class="hamburger-box">
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
+            </span>
           </button>
         </div>
       </nav>
 
-      <nav v-if="menuOpen" id="mobile-navigation" class="mobile-menu" aria-label="Mobile Navigation">
-        <a
-          v-for="link in navLinks"
-          :key="link.id"
-          :href="'#' + link.id"
-          class="mobile-link"
-          :class="{ active: isActive(link) }"
-          :aria-current="isActive(link) ? 'page' : undefined"
-          @click="closeMenu"
-        >
-          <component :is="link.Icon" :size="19" style="color: var(--accent);" aria-hidden="true" />
-          {{ link.label }}
-        </a>
-      </nav>
+      <Teleport to="body">
+      <Transition name="menu">
+        <nav v-if="menuOpen" id="mobile-navigation" class="menu-overlay" aria-label="Mobile Navigation">
+          <div class="menu-glow" aria-hidden="true"></div>
+
+          <div class="menu-links">
+            <RouterLink
+              v-for="(link, i) in navLinks"
+              :key="link.to"
+              :to="link.to"
+              class="menu-link"
+              :class="{ active: isActive(link) }"
+              :style="{ '--i': i }"
+              :aria-current="isActive(link) ? 'page' : undefined"
+              @click="closeMenu"
+            >
+              <span class="menu-link-index">{{ String(i + 1).padStart(2, '0') }}</span>
+              <span class="menu-link-label">{{ link.label }}</span>
+              <ArrowUpRight class="menu-link-arrow" :size="22" aria-hidden="true" />
+            </RouterLink>
+          </div>
+
+          <div class="menu-footer">
+            <a href="mailto:weidenauer.erik@outlook.com" class="menu-email">weidenauer.erik@outlook.com</a>
+            <div class="menu-socials">
+              <a href="https://github.com/WeidenauerErik" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profil von Erik Weidenauer (öffnet in neuem Tab)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+              </a>
+              <a href="https://www.linkedin.com/in/erik-weidenauer" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profil von Erik Weidenauer (öffnet in neuem Tab)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+          </div>
+        </nav>
+      </Transition>
+      </Teleport>
     </header>
 
     <!-- ░░░ PAGE CONTENT ░░░ -->
     <div id="main-content" tabindex="-1" style="flex: 1;">
-      <HomeView />
+      <RouterView />
     </div>
 
     <!-- ░░░ FOOTER ░░░ -->
@@ -91,15 +129,15 @@ function closeMenu() { menuOpen.value = false }
         <nav aria-label="Footer-Navigation">
           <div class="footer-section-title">Navigation</div>
           <div style="display: flex; flex-direction: column; gap: 11px;">
-            <a
+            <RouterLink
               v-for="link in navLinks"
-              :key="link.id"
-              :href="'#' + link.id"
+              :key="link.to"
+              :to="link.to"
               class="footer-link"
             >
               <component :is="link.Icon" :size="15" style="opacity: 0.6;" aria-hidden="true" />
               {{ link.label }}
-            </a>
+            </RouterLink>
           </div>
         </nav>
         <div>
@@ -139,6 +177,12 @@ function closeMenu() { menuOpen.value = false }
   backdrop-filter: saturate(160%) blur(14px);
   background: rgba(250, 250, 248, 0.82);
   border-bottom: 1px solid rgba(19, 18, 23, 0.06);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.nav-header--transparent {
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
 }
 .nav-inner {
   max-width: 1200px;
@@ -208,25 +252,161 @@ function closeMenu() { menuOpen.value = false }
   background: var(--paper);
   cursor: pointer;
   color: var(--ink);
-  transition: transform 0.15s var(--ease-out);
+  transition: transform 0.15s var(--ease-out), border-color 0.15s var(--ease-out), background 0.2s ease;
+  position: relative;
+  z-index: 60;
 }
 .hamburger:active { transform: scale(0.94); }
-.mobile-menu {
-  border-top: 1px solid rgba(19, 18, 23, 0.06);
-  background: rgba(250, 250, 248, 0.98);
-  padding: 8px 18px 18px;
+.hamburger.is-open {
+  background: transparent;
+  border-color: rgba(19, 18, 23, 0.16);
 }
-.mobile-link {
+
+.hamburger-box {
+  position: relative;
+  width: 18px;
+  height: 13px;
+  display: block;
+}
+.hamburger-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 0.3s var(--ease-out), opacity 0.2s var(--ease-out), top 0.3s var(--ease-out);
+}
+.hamburger-line:nth-child(1) { top: 0; }
+.hamburger-line:nth-child(2) { top: 5.5px; }
+.hamburger-line:nth-child(3) { top: 11px; }
+.hamburger.is-open .hamburger-line:nth-child(1) { top: 5.5px; transform: rotate(45deg); }
+.hamburger.is-open .hamburger-line:nth-child(2) { opacity: 0; }
+.hamburger.is-open .hamburger-line:nth-child(3) { top: 5.5px; transform: rotate(-45deg); }
+
+/* Mobile menu overlay */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 108px 28px 40px;
+  background: var(--paper);
+  overflow-y: auto;
+}
+
+.menu-glow {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(52, 82, 214, 0.22), transparent 60%),
+    radial-gradient(circle at 0% 100%, rgba(52, 82, 214, 0.14), transparent 55%);
+  pointer-events: none;
+}
+
+.menu-links {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-link {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 13px;
-  padding: 15px 10px;
-  font-size: 17px;
+  gap: 16px;
+  padding: 18px 4px;
+  border-bottom: 1px solid rgba(19, 18, 23, 0.08);
+  font-family: var(--font-display);
+  font-size: clamp(22px, 7vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: menuLinkIn 0.5s var(--ease-out) forwards;
+  animation-delay: calc(var(--i) * 70ms + 90ms);
+}
+.menu-link:first-child { padding-top: 4px; }
+.menu-link.active { color: var(--accent-ink); }
+
+.menu-link-index {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-ink);
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+
+.menu-link-label { flex: 1; }
+
+.menu-link-arrow {
+  color: var(--accent);
+  opacity: 0;
+  transform: translate(-6px, 6px);
+  transition: opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+}
+.menu-link.active .menu-link-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+@keyframes menuLinkIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.menu-footer {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 28px;
+  margin-top: 24px;
+  border-top: 1px solid rgba(19, 18, 23, 0.08);
+  opacity: 0;
+  animation: menuLinkIn 0.5s var(--ease-out) forwards;
+  animation-delay: calc(var(--i, 4) * 70ms + 90ms);
+}
+
+.menu-email {
+  font-size: 14.5px;
   font-weight: 600;
   color: var(--ink-soft);
-  border-bottom: 1px solid rgba(19, 18, 23, 0.05);
 }
-.mobile-link.active { color: var(--ink); }
+
+.menu-socials { display: flex; gap: 12px; }
+.menu-socials a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  border: 1px solid rgba(19, 18, 23, 0.12);
+  color: var(--ink);
+  transition: background 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+}
+.menu-socials a:hover {
+  background: var(--accent-tint);
+  border-color: var(--accent);
+}
+
+.menu-enter-active,
+.menu-leave-active {
+  transition: opacity 0.2s ease;
+}
+.menu-enter-from,
+.menu-leave-to {
+  opacity: 0;
+}
+
+@media (min-width: 881px) {
+  .menu-overlay { display: none; }
+}
+
 .desktop-only { display: flex; }
 .mobile-only { display: none; }
 
