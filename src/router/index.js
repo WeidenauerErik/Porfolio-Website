@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-const BASE_URL = 'https://erikweidenauer.at'
+const BASE_URL = 'https://www.weidenauererik.com'
 
 const routes = [
   {
