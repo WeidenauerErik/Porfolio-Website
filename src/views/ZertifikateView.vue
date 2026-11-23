@@ -15,10 +15,10 @@ const certificates = [
   {title: 'SkillDisplay Profile', meta: 'SkillDisplay GmbH · Juni 2026', href: 'https://my.skilldisplay.eu/en/profile/9435'},
   {title: 'Amazon Translate – Getting Started', meta: 'AWS Training & Certification · Feb 2026'},
   {title: 'Amazon Location Service – Getting Started', meta: 'AWS Training & Certification · Feb 2026'},
+  {title: 'NSE 1, NSE 2, NSE 3', meta: 'Fortinet · 2023 – 2024'},
 ]
 
 const awards = [
-  {title: '6th in Europe 2026 – Vaulting (Individual)', meta: 'Fédération Equestre Internationale (FEI) · Aug. 2026'},
   {title: 'World Champion 2025 – Vaulting (Squad)', meta: 'Fédération Equestre Internationale (FEI) · Aug. 2025'},
   {title: '8th in the World 2025 – Vaulting (Individual)', meta: 'Fédération Equestre Internationale (FEI) · Juli 2025'},
   {title: '8th in Europe 2024 – Vaulting (Individual)', meta: 'Fédération Equestre Internationale (FEI) · Juli 2024'},

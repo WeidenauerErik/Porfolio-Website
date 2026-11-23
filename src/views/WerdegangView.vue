@@ -5,37 +5,49 @@ useReveal()
 
 const experience = [
   {
-    role: 'Freelancer – Softwareentwicklung',
-    org: 'Selbstständig',
-    period: 'Juni 2026 – Aug 2026',
-    desc: 'Maßgeschneiderte Softwarelösungen für Unternehmen und Privatpersonen – Prozesse automatisieren, technische Herausforderungen lösen und digitale Ideen umgesetzt. Sauberer, wartbarer Code über Web-Apps, Desktop-Tools, Backend-Systeme und APIs.',
+    role: 'Full Stack Entwickler',
+    org: 'SmartDisc',
+    period: 'Jun 2026 – Heute',
+    desc: 'Entwicklung einer plattformübergreifenden App mit Vue 3 und Capacitor (iOS, Android, Web) aus einer einzigen Codebasis. Benutzerauthentifizierung in App und Backend implementiert, Sensordaten per Peer-to-Peer-Bluetooth empfangen und Wurfdaten analysiert. RESTful-Backend-API mit Symfony und PostgreSQL entworfen und gepflegt, Infrastruktur (Dockploy, DNS, SendGrid) sowie Projektwebsite verwaltet.',
   },
   {
-    role: 'Website Administrator',
+    role: 'Grundwehrdienst & Heeresleistungssportzentrum (Voltigieren)',
+    org: 'Österreichisches Bundesheer',
+    period: 'Okt 2026 – Heute',
+    desc: 'Grundwehrdienst mit Einteilung im Heeresleistungssportzentrum für Voltigieren.',
+  },
+  {
+    role: 'Freiberuflicher Softwareentwickler',
+    org: 'Selbstständig',
+    period: 'Jun 2026 – Aug 2026',
+    desc: 'Maßgeschneiderte Softwarelösungen für Unternehmen und Privatkunden, Automatisierung von Prozessen und End-to-End-Lieferung digitaler Produkte. Sauberer, wartbarer Code in Webanwendungen, Desktop-Tools, Backend-Systemen und APIs mit PostgreSQL und Doctrine.',
+  },
+  {
+    role: 'Website-Administrator',
     org: 'Naturfreunde Österreich',
     period: 'Jän 2023 – Feb 2026',
-    desc: 'Betreuung und Wartung der Website der Ortsgruppe Neubau.',
+    desc: 'Eigenverantwortliche Administration und Wartung der offiziellen Website der Ortsgruppe Neubau, Content-Updates und Optimierung der CMS-basierten Plattform.',
   },
   {
-    role: 'Network Engineering Praktikum',
+    role: 'Praktikant Netzwerktechnik',
     org: 'CANCOM Austria',
     period: 'Aug 2024',
-    desc: 'NSE-3-Zertifizierung abgeschlossen; Python-Skripte für Netzwerk-Automatisierung entwickelt und implementiert.',
+    desc: 'Fortinet-NSE-3-Zertifizierung erworben und Python-Skripte zur Netzwerkautomatisierung entwickelt.',
   },
   {
-    role: 'Network Engineering Praktikum',
-    org: 'Kapsch BusinessCom',
+    role: 'Praktikant Netzwerktechnik',
+    org: 'CANCOM Austria',
     period: 'Aug 2023',
-    desc: 'NSE 1 & NSE 2 erworben; Palo Alto- und FortiGate-Firewalls sowie Cisco-Switches in praktischen Netzwerkumgebungen konfiguriert.',
+    desc: 'Konfiguration und Verwaltung von Cisco-Switches sowie Palo-Alto-Networks- und Fortinet-FortiGate-Firewalls. Fortinet-NSE-1- und NSE-2-Zertifizierungen erworben.',
   },
 ]
 
 const education = [
   {
     role: 'HTL Rennweg',
-    org: 'Information Technology',
-    period: '2021 – 2026',
-    desc: 'Praxisnahe Ausbildung in Softwareentwicklung, Network Engineering, Cybersecurity und Projektmanagement – mit starkem Fokus auf Problemlösung, sichere Systeme und Teamarbeit.',
+    org: 'Informationstechnologie · Note: 1,8',
+    period: 'Sep 2021 – Jun 2026',
+    desc: 'Full-Stack-Webentwicklung mit Java/Spring Boot und Symfony (PHP), Vue.js mit Capacitor für plattformübergreifende Frontends. Netzwerktechnik & Cybersecurity sowie Multimedia & Design (Adobe Creative Suite). Diplomarbeit: DanceMaster – plattformübergreifende AR-Tanz-Lernapplikation.',
   },
 ]
 </script>
