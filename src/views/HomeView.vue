@@ -1,7 +1,13 @@
 <script setup>
+import {computed} from 'vue'
 import {useReveal} from '@/composables/useReveal'
+import {useI18n} from '@/composables/useI18n'
+import {content} from '@/i18n/content'
 
 useReveal()
+
+const {locale} = useI18n()
+const t = computed(() => content[locale.value].home)
 
 const socials = [
   {icon: 'github', label: 'GitHub', href: 'https://github.com/WeidenauerErik'},
@@ -20,21 +26,18 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
         <!-- Left -->
         <div data-reveal>
           <h1 class="hero-h1">
-            Full Stack<br>
-            <span style="color: var(--accent);">Developer</span>
+            {{ t.heroLine1 }}<br>
+            <span style="color: var(--accent);">{{ t.heroLine2 }}</span>
           </h1>
           <p class="hero-sub">
-            Hi, ich bin <strong style="color:var(--ink);">Erik Weidenauer</strong> – Absolvent der HTL Rennweg.
-            Ich entwickle moderne, hochwertige Software.
+            {{ t.sub1Pre }}<strong style="color:var(--ink);">{{ t.sub1Name }}</strong>{{ t.sub1Post }}
           </p>
           <p class="hero-sub">
-            Ich spezialisiere mich auf <strong style="color:var(--ink);">VueJS, Symfony, Spring Boot und Python</strong>
-            und arbeite ständig daran, meine technische Expertise zu vertiefen und effiziente, skalierbare
-            Lösungen zu liefern – mit Präzision, Neugier und dem Anspruch, jeden Tag besser zu werden.
+            {{ t.sub2Pre }}<strong style="color:var(--ink);">{{ t.sub2Bold }}</strong>{{ t.sub2Post }}
           </p>
           <div class="hero-btns">
             <RouterLink to="/kontakt" class="btn-primary">
-              Kontakt aufnehmen
+              {{ t.contactBtn }}
             </RouterLink>
             <a
                 v-for="s in socials"
@@ -66,7 +69,7 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
         <div data-reveal data-reveal-delay="120" class="hero-photo-wrap">
           <img
               src="/erik2.jpeg"
-              alt="Portrait von Erik Weidenauer, Full Stack Developer"
+              :alt="t.photoAlt"
               class="hero-photo"
               width="440"
               height="517"

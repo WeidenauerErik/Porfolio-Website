@@ -1,43 +1,28 @@
 <script setup>
+import {computed} from 'vue'
 import {ExternalLink} from 'lucide-vue-next'
 import {useReveal} from '@/composables/useReveal'
+import {useI18n} from '@/composables/useI18n'
+import {content} from '@/i18n/content'
 
 useReveal()
 
-const certificates = [
-  {title: 'Ubuntu Linux Professional Certificate', meta: 'Canonical · Juli 2026', href: 'https://www.linkedin.com/learning/certificates/c02c442397f52a4300bea639ed93247eae8ee84dec769f1819a38c22c0d848c1'},
-  {title: 'Career Essentials in Generative AI', meta: 'Microsoft & LinkedIn · Juli 2026', href: 'https://www.linkedin.com/learning/certificates/23499515084bddf475601ed466ffb79d0eb85a02f548f269f7eeba3a766dd794'},
-  {title: 'Career Essentials in GitHub Professional', meta: 'GitHub · Juli 2026', href: 'https://www.linkedin.com/learning/certificates/21c3d9262a19b1b8a24c90d13c40cba867e37465fe4f4faa036d874eb7f09bfe'},
-  {title: 'Artificial Intelligence Fundamentals', meta: 'IBM · Juli 2026', href: 'https://www.credly.com/badges/26a8a95d-73f1-4c76-8193-5332029e6858/linked_in_profile'},
-  {title: 'Introduction to Responsible AI', meta: 'Google · Juli 2026', href: 'https://www.skills.google/public_profiles/26104c2f-319a-4513-b082-648cb43573cc/badges/25495385'},
-  {title: 'Communication and Team Building Seminar', meta: 'HTL Rennweg · März 2025'},
-  {title: 'Drupal in a Day', meta: 'Drupal · Okt 2025'},
-  {title: 'SkillDisplay Profile', meta: 'SkillDisplay GmbH · Juni 2026', href: 'https://my.skilldisplay.eu/en/profile/9435'},
-  {title: 'Amazon Translate – Getting Started', meta: 'AWS Training & Certification · Feb 2026'},
-  {title: 'Amazon Location Service – Getting Started', meta: 'AWS Training & Certification · Feb 2026'},
-  {title: 'NSE 1, NSE 2, NSE 3', meta: 'Fortinet · 2023 – 2024'},
-]
-
-const awards = [
-  {title: 'World Champion 2025 – Vaulting (Squad)', meta: 'Fédération Equestre Internationale (FEI) · Aug. 2025'},
-  {title: '8th in the World 2025 – Vaulting (Individual)', meta: 'Fédération Equestre Internationale (FEI) · Juli 2025'},
-  {title: '8th in Europe 2024 – Vaulting (Individual)', meta: 'Fédération Equestre Internationale (FEI) · Juli 2024'},
-  {title: '12th in the World 2023 – Vaulting (Individual)', meta: 'Fédération Equestre Internationale (FEI) · Juli 2023'},
-]
+const {locale} = useI18n()
+const t = computed(() => content[locale.value].zertifikate)
 </script>
 
 <template>
   <main class="page-main">
     <header data-reveal class="page-hero">
-      <h1 class="page-h1">Zertifikate &amp; Auszeichnungen</h1>
-      <p class="page-sub">Weiterbildungen, Workshops und sportliche Erfolge.</p>
+      <h1 class="page-h1">{{ t.h1 }}</h1>
+      <p class="page-sub">{{ t.sub }}</p>
     </header>
 
     <!-- Certificates -->
     <div data-reveal class="timeline-section">
-      <h2 class="sub-heading">Zertifikate &amp; Workshops</h2>
+      <h2 class="sub-heading">{{ t.certsHeading }}</h2>
       <div class="cert-timeline">
-        <div v-for="c in certificates" :key="c.title" class="cert-timeline-item">
+        <div v-for="c in t.certificates" :key="c.title" class="cert-timeline-item">
           <div class="cert-timeline-body">
             <div class="cert-timeline-title">{{ c.title }}</div>
             <div class="cert-timeline-meta">{{ c.meta }}</div>
@@ -48,7 +33,7 @@ const awards = [
                 rel="noopener noreferrer"
                 class="proof-btn"
             >
-              Nachweis anzeigen
+              {{ t.proofBtn }}
               <ExternalLink :size="14" aria-hidden="true"/>
             </a>
           </div>
@@ -58,9 +43,9 @@ const awards = [
 
     <!-- Awards -->
     <div data-reveal class="timeline-section">
-      <h2 class="sub-heading">Auszeichnungen</h2>
+      <h2 class="sub-heading">{{ t.awardsHeading }}</h2>
       <div class="cert-timeline">
-        <div v-for="a in awards" :key="a.title" class="cert-timeline-item">
+        <div v-for="a in t.awards" :key="a.title" class="cert-timeline-item">
           <div>
             <div class="cert-timeline-title">{{ a.title }}</div>
             <div class="cert-timeline-meta">{{ a.meta }}</div>

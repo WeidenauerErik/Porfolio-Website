@@ -1,69 +1,28 @@
 <script setup>
+import {computed} from 'vue'
 import {useReveal} from '@/composables/useReveal'
+import {useI18n} from '@/composables/useI18n'
+import {content} from '@/i18n/content'
 
 useReveal()
 
-const experience = [
-  {
-    role: 'Full Stack Entwickler',
-    org: 'SmartDisc',
-    period: 'Jun 2026 – Heute',
-    desc: 'Entwicklung einer plattformübergreifenden App mit Vue 3 und Capacitor (iOS, Android, Web) aus einer einzigen Codebasis. Benutzerauthentifizierung in App und Backend implementiert, Sensordaten per Peer-to-Peer-Bluetooth empfangen und Wurfdaten analysiert. RESTful-Backend-API mit Symfony und PostgreSQL entworfen und gepflegt, Infrastruktur (Dockploy, DNS, SendGrid) sowie Projektwebsite verwaltet.',
-  },
-  {
-    role: 'Grundwehrdienst & Heeresleistungssportzentrum (Voltigieren)',
-    org: 'Österreichisches Bundesheer',
-    period: 'Okt 2026 – Heute',
-    desc: 'Grundwehrdienst mit Einteilung im Heeresleistungssportzentrum für Voltigieren.',
-  },
-  {
-    role: 'Freiberuflicher Softwareentwickler',
-    org: 'Selbstständig',
-    period: 'Jun 2026 – Aug 2026',
-    desc: 'Maßgeschneiderte Softwarelösungen für Unternehmen und Privatkunden, Automatisierung von Prozessen und End-to-End-Lieferung digitaler Produkte. Sauberer, wartbarer Code in Webanwendungen, Desktop-Tools, Backend-Systemen und APIs mit PostgreSQL und Doctrine.',
-  },
-  {
-    role: 'Website-Administrator',
-    org: 'Naturfreunde Österreich',
-    period: 'Jän 2023 – Feb 2026',
-    desc: 'Eigenverantwortliche Administration und Wartung der offiziellen Website der Ortsgruppe Neubau, Content-Updates und Optimierung der CMS-basierten Plattform.',
-  },
-  {
-    role: 'Praktikant Netzwerktechnik',
-    org: 'CANCOM Austria',
-    period: 'Aug 2024',
-    desc: 'Fortinet-NSE-3-Zertifizierung erworben und Python-Skripte zur Netzwerkautomatisierung entwickelt.',
-  },
-  {
-    role: 'Praktikant Netzwerktechnik',
-    org: 'CANCOM Austria',
-    period: 'Aug 2023',
-    desc: 'Konfiguration und Verwaltung von Cisco-Switches sowie Palo-Alto-Networks- und Fortinet-FortiGate-Firewalls. Fortinet-NSE-1- und NSE-2-Zertifizierungen erworben.',
-  },
-]
+const {locale} = useI18n()
+const t = computed(() => content[locale.value].werdegang)
 
-const education = [
-  {
-    role: 'HTL Rennweg',
-    org: 'Informationstechnologie · Note: 1,8',
-    period: 'Sep 2021 – Jun 2026',
-    desc: 'Full-Stack-Webentwicklung mit Java/Spring Boot und Symfony (PHP), Vue.js mit Capacitor für plattformübergreifende Frontends. Netzwerktechnik & Cybersecurity sowie Multimedia & Design (Adobe Creative Suite). Diplomarbeit: DanceMaster – plattformübergreifende AR-Tanz-Lernapplikation.',
-  },
-]
 </script>
 
 <template>
   <main class="page-main">
     <header data-reveal class="page-hero">
-      <h1 class="page-h1">Berufserfahrung und Ausbildung</h1>
-      <p class="page-sub">Jobs, Praktika und Ausbildung.</p>
+      <h1 class="page-h1">{{ t.h1 }}</h1>
+      <p class="page-sub">{{ t.sub }}</p>
     </header>
 
     <!-- Experience -->
     <div data-reveal class="timeline-section">
-      <h2 class="sub-heading">Berufserfahrung</h2>
+      <h2 class="sub-heading">{{ t.experienceHeading }}</h2>
       <div class="timeline">
-        <div v-for="x in experience" :key="x.role" class="timeline-item">
+        <div v-for="x in t.experience" :key="x.role + x.period" class="timeline-item">
           <div>
             <div class="timeline-title-row">
               <h3 class="timeline-role">{{ x.role }}</h3>
@@ -78,9 +37,9 @@ const education = [
 
     <!-- Education -->
     <div data-reveal class="timeline-section">
-      <h2 class="sub-heading">Ausbildung</h2>
+      <h2 class="sub-heading">{{ t.educationHeading }}</h2>
       <div class="timeline">
-        <div v-for="e in education" :key="e.role" class="timeline-item">
+        <div v-for="e in t.education" :key="e.role" class="timeline-item">
           <div>
             <div class="timeline-title-row">
               <h3 class="timeline-role">{{ e.role }}</h3>

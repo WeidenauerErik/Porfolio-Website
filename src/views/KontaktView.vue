@@ -1,14 +1,16 @@
 <script setup>
-import {Send, Mail, Phone, MapPin} from 'lucide-vue-next'
+import {computed} from 'vue'
+import {Send} from 'lucide-vue-next'
 import {useReveal} from '@/composables/useReveal'
+import {useI18n} from '@/composables/useI18n'
+import {content} from '@/i18n/content'
 
 useReveal()
 
-const contacts = [
-  {Icon: Mail, label: 'E-Mail', value: 'weidenauer.erik@outlook.com', href: 'mailto:weidenauer.erik@outlook.com'},
-  {Icon: Phone, label: 'Telefon', value: '+43 664 75596725', href: 'tel:+4366475596725'},
-  {Icon: MapPin, label: 'Standort', value: 'Österreich', href: null},
-]
+const {locale} = useI18n()
+const t = computed(() => content[locale.value].kontakt)
+
+const contacts = computed(() => t.value.contacts)
 
 const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`
 </script>
@@ -20,14 +22,14 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
       <div class="contact-glow" aria-hidden="true"></div>
       <div class="contact-grid">
         <div style="position: relative;">
-          <h1 class="contact-h1">Sag hallo.</h1>
+          <h1 class="contact-h1">{{ t.h1 }}</h1>
           <p class="contact-sub">
-            Fragen, Feedback oder einfach vernetzen – schreib mir gerne.
+            {{ t.sub }}
           </p>
           <div class="contact-actions">
             <a href="mailto:weidenauer.erik@outlook.com" class="btn-email">
               <Send :size="18" aria-hidden="true"/>
-              E-Mail senden
+              {{ t.emailBtn }}
             </a>
           </div>
         </div>
@@ -41,9 +43,6 @@ const grainSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
               class="contact-row"
               :style="c.href ? {} : { cursor: 'default' }"
           >
-            <span class="contact-icon" aria-hidden="true">
-              <component :is="c.Icon" :size="21"/>
-            </span>
             <div>
               <div class="contact-label">{{ c.label }}</div>
               <div class="contact-value">{{ c.value }}</div>

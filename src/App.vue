@@ -1,19 +1,22 @@
 <script setup>
-import { ref, watch, onUnmounted } from 'vue'
+import { ref, watch, computed, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import {
   Home, Briefcase, Award, Mail, ArrowUpRight
 } from 'lucide-vue-next'
+import { useI18n } from '@/composables/useI18n'
+import { content } from '@/i18n/content'
 
 const menuOpen = ref(false)
 const route = useRoute()
+const { locale, setLocale } = useI18n()
 
-const navLinks = [
-  { label: 'Start',                        to: '/',            Icon: Home },
-  { label: 'Berufserfahrung & Ausbildung', to: '/werdegang',   Icon: Briefcase },
-  { label: 'Zertifikate & Auszeichnungen', to: '/zertifikate', Icon: Award },
-  { label: 'Kontakt',                      to: '/kontakt',     Icon: Mail },
-]
+const navIcons = [Home, Briefcase, Award, Mail]
+const t = computed(() => content[locale.value].nav)
+const tFooter = computed(() => content[locale.value].footer)
+const navLinks = computed(() =>
+  t.value.links.map((link, i) => ({ ...link, Icon: navIcons[i] }))
+)
 
 function isActive(link) {
   return route.path === link.to
@@ -39,11 +42,11 @@ onUnmounted(() => {
   <div style="position: relative; overflow-x: clip; background: var(--paper); min-height: 100vh; display: flex; flex-direction: column;">
 
     <!-- Accessibility: Skip to main content -->
-    <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
+    <a href="#main-content" class="skip-link">{{ t.skipLink }}</a>
 
     <!-- ░░░ NAVIGATION ░░░ -->
     <header class="nav-header" :class="{ 'nav-header--transparent': menuOpen }">
-      <nav class="nav-inner" aria-label="Hauptnavigation">
+      <nav class="nav-inner" :aria-label="t.mainNavAriaLabel">
         <div class="nav-links desktop-only">
           <RouterLink
             v-for="link in navLinks"
@@ -60,8 +63,25 @@ onUnmounted(() => {
         </div>
 
         <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="lang-switch desktop-only" role="group" aria-label="Language / Sprache">
+            <span class="lang-switch-slider" :class="{ 'is-en': locale === 'en' }" aria-hidden="true"></span>
+            <button
+              type="button"
+              class="lang-btn"
+              :class="{ active: locale === 'de' }"
+              :aria-pressed="locale === 'de'"
+              @click="setLocale('de')"
+            >DE</button>
+            <button
+              type="button"
+              class="lang-btn"
+              :class="{ active: locale === 'en' }"
+              :aria-pressed="locale === 'en'"
+              @click="setLocale('en')"
+            >EN</button>
+          </div>
           <RouterLink to="/kontakt" class="btn-talk" @click="closeMenu">
-            Let's Talk <ArrowUpRight :size="16" aria-hidden="true" />
+            {{ t.talk }} <ArrowUpRight :size="16" aria-hidden="true" />
           </RouterLink>
           <button
             class="hamburger mobile-only"
@@ -69,7 +89,7 @@ onUnmounted(() => {
             @click="menuOpen = !menuOpen"
             :aria-expanded="menuOpen"
             aria-controls="mobile-navigation"
-            aria-label="Menü"
+            :aria-label="t.menuAriaLabel"
           >
             <span class="hamburger-box">
               <span class="hamburger-line"></span>
@@ -82,7 +102,7 @@ onUnmounted(() => {
 
       <Teleport to="body">
       <Transition name="menu">
-        <nav v-if="menuOpen" id="mobile-navigation" class="menu-overlay" aria-label="Mobile Navigation">
+        <nav v-if="menuOpen" id="mobile-navigation" class="menu-overlay" :aria-label="t.mobileNavAriaLabel">
           <div class="menu-glow" aria-hidden="true"></div>
 
           <div class="menu-links">
@@ -103,12 +123,28 @@ onUnmounted(() => {
           </div>
 
           <div class="menu-footer">
-            <a href="mailto:weidenauer.erik@outlook.com" class="menu-email">weidenauer.erik@outlook.com</a>
+            <div class="lang-switch" role="group" aria-label="Language / Sprache">
+              <span class="lang-switch-slider" :class="{ 'is-en': locale === 'en' }" aria-hidden="true"></span>
+              <button
+                type="button"
+                class="lang-btn"
+                :class="{ active: locale === 'de' }"
+                :aria-pressed="locale === 'de'"
+                @click="setLocale('de')"
+              >DE</button>
+              <button
+                type="button"
+                class="lang-btn"
+                :class="{ active: locale === 'en' }"
+                :aria-pressed="locale === 'en'"
+                @click="setLocale('en')"
+              >EN</button>
+            </div>
             <div class="menu-socials">
-              <a href="https://github.com/WeidenauerErik" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profil von Erik Weidenauer (öffnet in neuem Tab)">
+              <a href="https://github.com/WeidenauerErik" target="_blank" rel="noopener noreferrer" :aria-label="tFooter.githubAriaLabel">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
               </a>
-              <a href="https://www.linkedin.com/in/erik-weidenauer" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profil von Erik Weidenauer (öffnet in neuem Tab)">
+              <a href="https://www.linkedin.com/in/erik-weidenauer" target="_blank" rel="noopener noreferrer" :aria-label="tFooter.linkedinAriaLabel">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
               </a>
             </div>
@@ -126,8 +162,8 @@ onUnmounted(() => {
     <!-- ░░░ FOOTER ░░░ -->
     <footer class="site-footer">
       <div class="footer-inner">
-        <nav aria-label="Footer-Navigation">
-          <div class="footer-section-title">Navigation</div>
+        <nav :aria-label="t.footerNavAriaLabel">
+          <div class="footer-section-title">{{ tFooter.navigation }}</div>
           <div style="display: flex; flex-direction: column; gap: 11px;">
             <RouterLink
               v-for="link in navLinks"
@@ -141,17 +177,17 @@ onUnmounted(() => {
           </div>
         </nav>
         <div>
-          <div class="footer-section-title">Kontakt</div>
+          <div class="footer-section-title">{{ tFooter.contact }}</div>
           <div style="display: flex; flex-direction: column; gap: 11px;">
             <a href="mailto:weidenauer.erik@outlook.com" class="footer-link">
               <Mail :size="15" style="opacity: 0.6;" aria-hidden="true" />
               weidenauer.erik@outlook.com
             </a>
-            <a href="https://github.com/WeidenauerErik" target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="GitHub Profil von Erik Weidenauer (öffnet in neuem Tab)">
+            <a href="https://github.com/WeidenauerErik" target="_blank" rel="noopener noreferrer" class="footer-link" :aria-label="tFooter.githubAriaLabel">
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6;display:block;flex-shrink:0;" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
               GitHub
             </a>
-            <a href="https://www.linkedin.com/in/erik-weidenauer" target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="LinkedIn Profil von Erik Weidenauer (öffnet in neuem Tab)">
+            <a href="https://www.linkedin.com/in/erik-weidenauer" target="_blank" rel="noopener noreferrer" class="footer-link" :aria-label="tFooter.linkedinAriaLabel">
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6;display:block;flex-shrink:0;" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
               LinkedIn
             </a>
@@ -161,7 +197,7 @@ onUnmounted(() => {
       <div class="footer-bottom">
         <div class="footer-bottom-inner">
           <span style="display: inline-flex; align-items: center; gap: 6px;">
-            © Erik Weidenauer - all rights reserved
+            {{ tFooter.copyright }}
           </span>
         </div>
       </div>
@@ -228,6 +264,48 @@ onUnmounted(() => {
   border-radius: 2px;
   background: var(--accent);
 }
+.lang-switch {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 84px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  overflow: hidden;
+}
+.lang-switch-slider {
+  position: absolute;
+  top: -1.5px;
+  left: -1.5px;
+  width: calc(50% + 1.5px);
+  height: calc(100% + 3px);
+  border-radius: 999px;
+  background: var(--ink);
+  transition: transform 0.25s var(--ease-out);
+}
+.lang-switch-slider.is-en {
+  transform: translateX(calc(100% - 1.5px));
+}
+.lang-btn {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  appearance: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  transition: color 0.2s var(--ease-out);
+}
+.lang-btn.active {
+  color: #fff;
+}
+
 .btn-talk {
   display: inline-flex;
   align-items: center;
